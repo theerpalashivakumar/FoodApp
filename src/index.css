@@ -87,3 +87,19 @@ li{
 Link{
     list-style-type: none;
 }
+.restaurant-details-card{
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid grey;
+    border-width: 10px grey;
+}
+.icon-rating{
+    color:green;
+}
+.rating-name{
+    font-size: 14px;
+    font-family: "Gill Sans", sans-serif;
+}
+.cusiness{
+ color:orange;   
+}

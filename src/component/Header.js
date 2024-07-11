@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { HEADER_LOGO } from "../utils/constance";
 
 const Header = () => {
   const[text, setText]=useState("Login")
     return (
       <div className="header">
         <div>
-          <img src="https://cdn.logojoy.com/wp-content/uploads/2018/05/01105934/1855.png"  className="logo"/>
+          <img src={HEADER_LOGO}  className="logo"/>
         </div>
         <div className="nav">
           <ul>
