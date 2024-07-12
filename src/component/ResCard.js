@@ -1,19 +1,20 @@
 
+import { IMAGE_ID } from "../utils/constance";
 const ResCard = (props) => {
   const { resData } = props;
   // const {info}=resData
-  const { name, avgRating, cuisines } = resData?.info
+  const { name, avgRating, cuisines,cloudinaryImageId } = resData?.info
  
   return (
     <div className="res-card">
-       {/* <img
-        src={`https://res.cloudinary.com/demo/image/upload/${cloudinaryImageId}`}
+       <img
+        src={IMAGE_ID +cloudinaryImageId}
         alt="food"
         className="res-log"
-      /> */}
+      />
       <h3>{name}</h3>
-      <h5>{avgRating}</h5>
-      <h5>{cuisines.join(', ')}</h5>
+      <h6>{avgRating}</h6>
+      <h6>{cuisines.join(', ')}</h6>
     </div>
   );
 };
