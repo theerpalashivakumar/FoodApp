@@ -1,28 +1,30 @@
 import React, { useEffect, useState } from "react";
 import ShimmerCards from "./ShimmerCards";
 import { useParams } from "react-router";
-import { RESTAURANT_MENU_API } from "../utils/constance";
+
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar,faBicycle } from "@fortawesome/free-solid-svg-icons";
+import useRestaurantMenu from "../utils/useRestaurantMenu";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
   console.log(resId);
+  const resInfo = useRestaurantMenu(resId)
 
-  const [resInfo, setResInfo] = useState(null);
+  // const [resInfo, setResInfo] = useState(null);
 
-  useEffect(() => {
-    fetchMenu();
-  }, []);
+  // useEffect(() => {
+  //   fetchMenu();
+  // }, []);
 
-  const fetchMenu = async () => {
-    const data = await fetch(RESTAURANT_MENU_API + resId);
-    const json = await data.json();
-    // setResInfo(json.data.cards[0].card.card.text)
-    setResInfo(json);
-    console.log(json);
-  };
+  // const fetchMenu = async () => {
+  //   const data = await fetch(RESTAURANT_MENU_API + resId);
+  //   const json = await data.json();
+  //   // setResInfo(json.data.cards[0].card.card.text)
+  //   setResInfo(json);
+  //   console.log(json);
+  // };
 
   
   

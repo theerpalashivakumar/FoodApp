@@ -4,6 +4,7 @@ import ResCard from "./ResCard";
 import { useEffect, useState } from "react";
 import ShimmerCards from "./ShimmerCards";
 import { Link } from "react-router-dom";
+import useOnline from "../utils/useOnline";
 
 const Body = () => {
   const [filterData, setFilterData] = useState([]);
@@ -11,6 +12,8 @@ const Body = () => {
   const [searchText, setSearchText] = useState("");
   const [originalData, setOriginalData] = useState([]);
 
+
+  const onlineStatus = useOnline()
   useEffect(() => {
     fetchData();
   }, []);
@@ -41,6 +44,8 @@ const Body = () => {
     );
     setSearchFilter(searchResult);
   };
+  if (onlineStatus ===false) return <h1>your offline please check your internet once</h1>
+
 
   return filterData.length === 0 ? (
     <ShimmerCards />
