@@ -1,5 +1,3 @@
-
-
 import ResCard from "./ResCard";
 import { useEffect, useState } from "react";
 import ShimmerCards from "./ShimmerCards";
@@ -12,8 +10,7 @@ const Body = () => {
   const [searchText, setSearchText] = useState("");
   const [originalData, setOriginalData] = useState([]);
 
-
-  const onlineStatus = useOnline()
+  const onlineStatus = useOnline();
   useEffect(() => {
     fetchData();
   }, []);
@@ -25,6 +22,8 @@ const Body = () => {
     const data = await response.json();
     const restaurants =
       data.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+      console.log(data)
+      console.log(restaurants)
     setFilterData(restaurants);
     setSearchFilter(restaurants);
     setOriginalData(restaurants);
@@ -43,39 +42,45 @@ const Body = () => {
       res.info?.name.toLowerCase().includes(searchText.toLowerCase())
     );
     setSearchFilter(searchResult);
+    setSearchText("")
   };
-  if (onlineStatus ===false) return <h1>your offline please check your internet once</h1>
-
+  if (onlineStatus === false)
+    return <h1>your offline please check your internet once</h1>;
 
   return filterData.length === 0 ? (
     <ShimmerCards />
   ) : (
-    <div className="body-container">
-      <div>
+    <div className="p-4 flex flex-col">
+      <div className="mb-2 ">
         <input
+          className="p-1 border border-solid border-black"
           type="text"
-          placeholder="what you want"
+          placeholder="what do you want"
           value={searchText}
           onChange={(e) => {
             setSearchText(e.target.value);
           }}
         />
         <button
-          onClick={handleSearch}
-        >
+          className="bg-slate-400 px-2 py-1 rounded-sm	mx-2 text-amber-100	"
+          onClick={handleSearch}>
           Search
         </button>
-      </div>
-      <div className="search-container">
-        <button className="filter-btn" onClick={filterTopRated}>
+      
+        <button className="bg-slate-500 rounded-lg px-3 py-1" onClick={filterTopRated}>
           Filter top rated
         </button>
+      
       </div>
-      <div className="res-container">
+      
+      <div className="flex flex-wrap">
         {searchFilter.map((item) => (
           // <Link to={"/restaurants/:" + item.info?.id} key={item.info?.id}>
-          <Link to={`/restaurants/${item.info?.id}`} key={item.info?.id} style={{ textDecoration: 'none', color: 'inherit' }}>
-
+          <Link
+            // to={`/restaurants/${item.info?.id}`}
+            to ={"/restaurants/"+item.info?.id}
+            key={item.info?.id}
+            style={{ textDecoration: "none", color: "inherit" }}>
             <ResCard resData={item} />
           </Link>
         ))}
