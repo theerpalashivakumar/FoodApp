@@ -1,23 +1,36 @@
-import React, { lazy,Suspense } from "react";
+import React, { lazy,Suspense, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import './index.css'
 import Header from './component/Header'
 import Body from './component/Body'
 
-import { createBrowserRouter ,RouterProvider,Outlet } from "react-router-dom";
+import { createBrowserRouter ,RouterProvider,Outlet ,} from "react-router-dom";
 import Contact from "./component/Contact";
 // import About from "./component/About";
 import Error from './component/Error'
 import RestaurantMenu from "./component/RestaurantMenu";
+import UserContext from "./utils/UserContext";
 
 const About = lazy(()=>import("./component/About"))
 
 const App = () => {
+ const [userName,setUserName]=useState("")
+
+ useEffect(()=>{
+    //make an api call to the server and get the data of the user from the db
+    const data = {
+      name:"shiva"
+    }
+    setUserName(data.name)
+ },[])
+
   return (
+    <UserContext.Provider value={{loggedInUser:userName}}>
     <div>
       <Header />
      <Outlet/>
     </div>
+    </UserContext.Provider>
   );
 };
 

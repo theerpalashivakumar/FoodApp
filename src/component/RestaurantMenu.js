@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useContext, useEffect, useState } from "react";
 import ShimmerCards from "./ShimmerCards";
 import { useParams } from "react-router";
 
@@ -11,6 +11,12 @@ const RestaurantMenu = () => {
   const { resId } = useParams();
   console.log(resId);
   const resInfo = useRestaurantMenu(resId);
+  const [showIndex, setShowIndex] = useState(0);
+  const dummyData = " dummy data for prop drilling"
+
+
+
+ 
 
   // const [resInfo, setResInfo] = useState(null);
 
@@ -58,6 +64,14 @@ const RestaurantMenu = () => {
       }
     );
 
+    const toggleShowIndex = (index) => {
+      if (index === showIndex) {
+        setShowIndex(null); 
+      } else {
+        setShowIndex(index); 
+      }
+    };
+
   console.log(category);
   return (
     <div className="flex items-center flex-col ">
@@ -86,29 +100,16 @@ const RestaurantMenu = () => {
         </div>
       </div>
       <div>
-        {/* <h4 className="font-bold text-black">Recomended ({itemCards.length})</h4> */}
-        {/* 
-        {itemCards.map((item) => (
-          <div
-            key={item.card.info.id}
-            style={{
-              border: "1px solid black",
-              margin: "5px",
-              padding: "10px",
-              borderRadius: "15px",
-            }}>
-            <h4>{item?.card?.info?.name}</h4>
-            <h5>{item.card.info.price/100}</h5>
-            <h6>
-              {item.card.info.ratings.aggregatedRating.rating} (
-              {item.card.info.ratings.aggregatedRating.ratingCountV2}){" "}
-            </h6>
-            <p>{item?.card?.info?.description}</p>
-          </div>
-        ))} */}
-       {category.map((item)=>
-          <ResCategory data={item} key={item.id}/>
-       )}
+      
+        {category.map((item, index) => (
+          <ResCategory
+            data={item}
+            key={item.data?.card?.card.title}
+            viewList={index === showIndex ? true : false}
+            setShowIndex={() => toggleShowIndex(index)}
+          
+          />
+        ))}
       </div>
     </div>
   );

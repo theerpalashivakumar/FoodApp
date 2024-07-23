@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { HEADER_LOGO } from "../utils/constance";
 import useOnline from "../utils/useOnline";
+import UserContext from "../utils/UserContext";
 
 const Header = () => {
   const[text, setText]=useState("Login")
   const onlineStatus = useOnline()
+  const data =useContext(UserContext)
+  console.log(data)
     return (
       <div className="flex justify-between p-2 items-center border-solid border-2 border-indigo-600 bg-gray-300">
         <div>
@@ -19,7 +22,7 @@ const Header = () => {
             <Link to="/contact"> <li>Contact Us</li></Link>
             <li><button className="button" onClick={()=>{
               text === "Login" ?setText("Log Out"):setText("Login");
-            }}>{text}</button></li>
+            }}>{text}</button> {data.loggedInUser}</li>
             
           </ul>
           {/* <button className="button">Login</button> */}
