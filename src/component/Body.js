@@ -1,14 +1,18 @@
 import ResCard from "./ResCard";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ShimmerCards from "./ShimmerCards";
 import { Link } from "react-router-dom";
 import useOnline from "../utils/useOnline";
+import UserContext from '../utils/UserContext'
 
 const Body = () => {
   const [filterData, setFilterData] = useState([]);
   const [searchFilter, setSearchFilter] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [originalData, setOriginalData] = useState([]);
+
+  // const {setUserName}= useContext(UserContext)
+  const {loggedInUser,setUserName} =useContext(UserContext)
 
   const onlineStatus = useOnline();
   useEffect(() => {
@@ -51,7 +55,7 @@ const Body = () => {
     <ShimmerCards />
   ) : (
     <div className="p-4 flex flex-col">
-      <div className="mb-2 ">
+      <div className="mb-2 flex gap-3 ">
         <input
           className="p-1 border border-solid border-black"
           type="text"
@@ -70,6 +74,11 @@ const Body = () => {
         <button className="bg-slate-500 rounded-lg px-3 py-1" onClick={filterTopRated}>
           Filter top rated
         </button>
+        <div>
+          <label htmlFor="">input:</label>
+          <input className="border border-black rounded-lg mx-1" value={loggedInUser} onChange={(e)=>setUserName(e.target.value)}/>
+
+        </div>
       
       </div>
       
